@@ -1,0 +1,1 @@
+[{"User":"Rickie","Comment":"Köp falukorv!", "Time":0, "deleted":0},{"User":"Rickie","Comment":"Glöm inte att sms:a lasse!", "Time":0,"deleted":0}]

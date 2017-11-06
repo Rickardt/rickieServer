@@ -1,0 +1,1 @@
+[{"LightID":1,"IP":"192.168.0.3", "state":0, "comment":"Hall"},{"LightID":2,"IP":"192.168.0.3", "state":0, "comment":"Vardagsrum"}]
