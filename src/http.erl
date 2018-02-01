@@ -68,6 +68,7 @@ getip([$1,$9,$2,$.,$1,$6,$8,$.,$0,$.,A, 32|T])->
 getstate([State|Rest])->
 	{State, Rest}.
 
+%%Headers, standard plain text ok and json ok
 ok(Body) ->
 	"HTTP/1.1 200 OK \r\n"
 	++"Content-type: text/html\r\n"

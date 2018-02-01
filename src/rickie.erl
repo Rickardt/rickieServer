@@ -7,11 +7,18 @@
 
 -compile(export_all).
 
+-define(PATH, file:get_cwd()).
 
--define(SEARCHPATHDATA, "/home/rickard/workspace/rickieServer/src/data.txt").
--define(SEARCHPATHCOMMENTS, "/home/rickard/workspace/rickieServer/src/comments.txt").
+-define(SEARCHPATHDATA, getProperPath("/rickieServer/src/data.txt")).
+-define(SEARCHPATHCOMMENTS, getProperPath("/rickieServer/src/comments.txt")).
 -define(PORT, 8080).
 
+%%Get the proper searchpath to project folder
+getProperPath(String)->
+	{_, SP} = ?PATH,
+	SP ++ String.
+
+%%Start the Rickie http server
 start() ->
 	
 	register(rickie, spawn(fun() -> init(?PORT) end)),
@@ -44,6 +51,7 @@ init(Port) ->
 handler(Listen) ->
 	case gen_tcp:accept(Listen) of
 	{ok, Client} -> 
+		io:format("Rickie: incoming tcp connection, starting handler  ~w~n"),
 		spawn(fun()->request(Client) end),
 		handler(Listen);
 
@@ -65,13 +73,14 @@ request(Client) ->
 		end;
 		
 	{error, Error} ->
-		io:format("Rickie: error: ~w~n", [Error])
+		io:format("Rickie request error: ~w~n", [Error])
 	end,
 	gen_tcp:close(Client).
 
 
 %% reply({{ok, URI, _}, _, _})->{};
 
+%%Set of REST endpoints
 reply({{get, URI, _}, _, Body}) ->
 	case URI of
 		"/lightdata" ->

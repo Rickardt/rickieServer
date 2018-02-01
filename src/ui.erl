@@ -16,5 +16,10 @@ init()->
 	wxFrame:setStatusText(F, server:serverVersion()),
 	{_,SP}=?PATH,
 	Image = wxImage:new(SP ++"/rickieServer/src/images/RN.jpg"),
+%% 	wxButton:create(Button, F, 0),
+	ClientDC = wxClientDC:new(F),
+	Bitmap = wxBitmap:new(Image),
+	wxDC:drawBitmap(ClientDC, Bitmap, {0,0}),
+	
 	wxFrame:show(F).
 
